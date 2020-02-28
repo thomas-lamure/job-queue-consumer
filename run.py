@@ -1,6 +1,5 @@
 import os
 import sys
-import json
 import time
 import base64
 from azure.storage.queue import QueueClient
@@ -40,9 +39,9 @@ if __name__ == '__main__':
             time.sleep(POLL_INTERVAL)
 
         try:
-            content = json.loads(base64.b64decode(message.content))
+            content = base64.b64decode(message.content)
         except:
-            content = json.loads(message.content)
+            content = message.content
 
         if message.dequeue_count > MAX_DEQUEUE_COUNT:
             print('Message max dequeue count exceded, mouving it to poison queue...')
