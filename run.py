@@ -23,6 +23,10 @@ if __name__ == '__main__':
         raise e
 
     queue = QueueClient.from_connection_string(conn_str=connection_string, queue_name=queue_name)
+    try:
+        queue.create_queue()
+    except:
+        pass
 
     print(f'Process started, reading {QUEUE_READS} messages...')
     for queue_read in range(QUEUE_READS):
